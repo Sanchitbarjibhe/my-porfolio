@@ -10,8 +10,6 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  Github, 
-  Linkedin, 
   ExternalLink, 
   Star, 
   Briefcase, 
@@ -25,7 +23,7 @@ export default function Homepage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
@@ -450,7 +448,7 @@ export default function Homepage() {
             <div>
               <label className="text-xs font-semibold text-slate-400 block mb-1">Project Details / Inquiry</label>
               <textarea 
-                rows="4" 
+                rows={4} 
                 required
                 value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
