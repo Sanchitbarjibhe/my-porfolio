@@ -1,23 +1,26 @@
 'use client'
 import React, { useState } from 'react';
-import { 
-  Code2, 
-  Terminal, 
-  Cpu, 
-  Globe, 
-  CheckCircle2, 
-  ArrowRight, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  ExternalLink, 
-  Star, 
-  Briefcase, 
-  GraduationCap, 
+import {
+  Code2,
+  Terminal,
+  Cpu,
+  Globe,
+  CheckCircle2,
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  Star,
+  Briefcase,
+  GraduationCap,
   MessageSquare,
   Sparkles,
-  Send
+  Send,
+  ArrowUpRight,
+  Clock
 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Homepage() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -28,10 +31,38 @@ export default function Homepage() {
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };
-
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Building Agentic AI Workflows with LangGraph & Llama 3.1",
+      excerpt: "A deep dive into constructing autonomous AI agents with stateful multi-actor workflows, entity extraction, and FastAPI backends.",
+      date: "Sep 2026",
+      readTime: "5 min read",
+      category: "Agentic AI",
+      link: "#"
+    },
+    {
+      id: 2,
+      title: "Optimizing Next.js 15 App Router for Low-Latency Real-Time Dashboards",
+      excerpt: "How to leverage Server Actions, streaming SSR, and optimized API routes for real-time financial market analytics.",
+      date: "Aug 2026",
+      readTime: "7 min read",
+      category: "Full-Stack Dev",
+      link: "#"
+    },
+    {
+      id: 3,
+      title: "Integrating Web Speech API with Enterprise CRMs",
+      excerpt: "Implementing real-time hands-free voice-to-text logging and instant database synchronization in modern web applications.",
+      date: "Jul 2026",
+      readTime: "4 min read",
+      category: "Web APIs & UX",
+      link: "#"
+    }
+  ];
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-slate-950">
-      
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80 px-6 py-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
@@ -44,6 +75,8 @@ export default function Homepage() {
             <a href="#skills" className="hover:text-cyan-400 transition-colors">Skills</a>
             <a href="#experience" className="hover:text-cyan-400 transition-colors">Experience</a>
             <a href="#testimonials" className="hover:text-cyan-400 transition-colors">Testimonials</a>
+            <Link className="hover:text-cyan-400 transition-colors" href={'blogs'}>Blogs</Link>
+            <Link className="hover:text-cyan-400 transition-colors" href={'products'}>Products</Link>
           </div>
           <a href="#contact" className="px-4 py-2 text-sm font-semibold rounded-lg bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20">
             Let's Talk
@@ -113,7 +146,7 @@ export default function Homepage() {
           <h2 className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-2">Services & Solutions</h2>
           <p className="text-3xl font-bold text-slate-100">How I Can Help Your Business Grow</p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           <div className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-cyan-500/50 transition-all group">
             <div className="p-3 w-fit rounded-lg bg-cyan-500/10 text-cyan-400 mb-5 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
@@ -374,7 +407,46 @@ export default function Homepage() {
           </div>
         </div>
       </section>
+      <section id="blog" className="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800/80">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+          <div>
+            <h2 className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-2">Articles & Insights</h2>
+            <p className="text-3xl font-bold text-slate-100">Engineering Thoughts & Guides</p>
+          </div>
+          <a href="#" className="mt-4 md:mt-0 text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+            View All Posts <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
 
+        <div className="grid md:grid-cols-3 gap-8">
+          {blogPosts.map((post) => (
+            <div key={post.id} className="p-6 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-cyan-500/50 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                    <Clock className="w-3 h-3" /> {post.readTime}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-100 mb-2 group-hover:text-cyan-400 transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-slate-400 text-xs leading-relaxed mb-6">
+                  {post.excerpt}
+                </p>
+              </div>
+              <div className="flex justify-between items-center pt-4 border-t border-slate-800/60 text-xs text-slate-500">
+                <span>{post.date}</span>
+                <a href={post.link} className="font-semibold text-cyan-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                  Read Article <ArrowRight className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       {/* Contact & Call To Action */}
       <section id="contact" className="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800/80">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -414,7 +486,7 @@ export default function Homepage() {
           {/* Contact Form */}
           <form onSubmit={handleSubmit} className="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-4">
             <h3 className="text-xl font-bold text-slate-100 mb-2">Send a Message</h3>
-            
+
             {submitted && (
               <div className="p-3 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs">
                 Thank you! Your message has been sent successfully.
@@ -423,11 +495,11 @@ export default function Homepage() {
 
             <div>
               <label className="text-xs font-semibold text-slate-400 block mb-1">Your Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 required
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500"
                 placeholder="John Doe"
               />
@@ -435,11 +507,11 @@ export default function Homepage() {
 
             <div>
               <label className="text-xs font-semibold text-slate-400 block mb-1">Your Email</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 required
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500"
                 placeholder="john@example.com"
               />
@@ -447,18 +519,18 @@ export default function Homepage() {
 
             <div>
               <label className="text-xs font-semibold text-slate-400 block mb-1">Project Details / Inquiry</label>
-              <textarea 
-                rows={4} 
+              <textarea
+                rows={4}
                 required
                 value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500"
                 placeholder="Tell me about your project requirements..."
               ></textarea>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="w-full py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition-all flex justify-center items-center gap-2 shadow-lg shadow-cyan-500/20"
             >
               Send Message <Send className="w-4 h-4" />
