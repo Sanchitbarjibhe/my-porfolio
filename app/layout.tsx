@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 
-const googleVerification = process.env.GOOGLE_SITE_VERFICATION
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Digital Products & SaaS Boilerplates | Sanchit Barjibhe',
   description: 'Explore production-ready developer tools, Stripe integration kits, and AI toolkits engineered for fast SaaS launches and scale.',
-  verification: {
-    google: googleVerification
-  },
+
   keywords: ['Stripe Payment Kit', 'SaaS Boilerplate', 'Developer Tools', 'Next.js Templates', 'AI Toolkits'],
   openGraph: {
     title: 'Digital Products & SaaS Boilerplates | Sanchit Barjibhe',
